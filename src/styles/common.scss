@@ -1,0 +1,190 @@
+@mixin text($fontWeight, $fontSize, $lineHeight) {
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  line-height: $lineHeight;
+}
+
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.fill-height {
+  height: 100%;
+}
+
+.fill-width {
+  width: 100%;
+}
+
+.header-title {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  color: $neutral-400;
+}
+
+.btn-delete {
+  @extend .btn-action;
+  color: $red-1 !important;
+  border-color: $red-1;
+}
+
+.btn-action {
+  @include flex-center();
+  @include text(600, 18px, 100%);
+  height: 48px;
+  min-width: 120px;
+  padding: 0 15px;
+  background-color: $white;
+  color: $primary;
+
+  .btn-icon {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: $white;
+  }
+}
+
+.btn-add-new {
+  @include flex-center();
+  @include text(600, 18px, 100%);
+  height: 48px;
+  width: 120px;
+  padding: 0 15px;
+
+  .btn-icon {
+    margin-right: 10px;
+  }
+}
+
+.header .btn {
+  font-weight: 600;
+  font-size: 18px;
+  width: 120px;
+  height: 48px;
+  padding: 0 15px 0 15px;
+
+  .btn-icon {
+    margin-right: 10px;
+  }
+}
+
+// variables scss
+$flexDirections: ("row", "row-reverse", "column", "column-reverse");
+
+@each $direction in $flexDirections {
+  .flex-#{$direction} {
+    flex-direction: #{$direction};
+  }
+}
+
+$alignItems: ("stretch", "center", "flex-start", "flex-end", "baseline");
+
+@each $align in $alignItems {
+  .align-#{$align} {
+    align-items: #{$align};
+  }
+}
+
+$justifyContents: (
+  "center",
+  "space-around",
+  "space-between",
+  "space-evenly",
+  "flex-end",
+  "flex-start"
+);
+
+@each $justify in $justifyContents {
+  .justify-#{$justify} {
+    justify-content: #{$justify};
+  }
+}
+
+$gaps: (0, 4, 6, 8, 10, 12, 15, 16, 18, 20, 24, 32, 30, 40, 60, 70, 80);
+
+@each $gap in $gaps {
+  .gap-#{$gap} {
+    gap: #{$gap}px;
+  }
+}
+
+$amounts: (
+  0,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  12,
+  13,
+  14,
+  15,
+  16,
+  20,
+  24,
+  26,
+  19,
+  20,
+  24,
+  26,
+  28,
+  30,
+  36,
+  50,
+  60
+);
+$directions: (top, bottom, left, right, x, y);
+
+$directions: (top, bottom, left, right, x, y);
+@each $amount in $amounts {
+  @each $direction in $directions {
+    @if $direction ==y {
+      .my-#{$amount} {
+        margin-top: #{$amount}px !important;
+        margin-bottom: #{$amount}px !important;
+      }
+
+      .py-#{$amount} {
+        padding-top: #{$amount}px !important;
+        padding-bottom: #{$amount}px !important;
+      }
+    } @else if $direction ==x {
+      .mx-#{$amount} {
+        margin-right: #{$amount}px !important;
+        margin-left: #{$amount}px !important;
+      }
+
+      .px-#{$amount} {
+        padding-right: #{$amount}px !important;
+        padding-left: #{$amount}px !important;
+      }
+    } @else {
+      .m#{str-slice($direction, 0, 1)}-#{$amount} {
+        margin-#{$direction}: #{$amount}px !important;
+      }
+
+      .p#{str-slice($direction, 0, 1)}-#{$amount} {
+        padding-#{$direction}: #{$amount}px !important;
+      }
+
+      .m-#{$amount} {
+        margin: #{$amount}px !important;
+      }
+
+      .p-#{$amount} {
+        padding: #{$amount}px !important;
+      }
+    }
+  }
+}
