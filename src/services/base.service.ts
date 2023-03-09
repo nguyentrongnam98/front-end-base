@@ -5,7 +5,6 @@ import axios, {
    type AxiosRequestConfig
 } from "axios";
 import * as rax from "retry-axios";
-import { services } from ".";
 const axiosIntance = axios.create({
     baseURL: import.meta.env.VITE_API_BASE,
     timeout: import.meta.env.VITE_REQUEST_TIMEOUT
@@ -54,10 +53,6 @@ const handleRequestError = async (error: AxiosError): Promise<void> => {
         const { signal } = controller;
         config._retry = true;
         // refresh token
-        const oldToken = '111'
-        if (oldToken) {
-            services.auth.refreshToken('abcxyz')
-        } else services.auth.logout()
         return await timeout(import.meta.env.VITE_REQUEST_TIMEOUT, signal, () =>
         axiosIntance(config)
       );  

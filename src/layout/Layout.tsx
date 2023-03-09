@@ -1,9 +1,6 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
-export default function AuthLayout() {
-  if (!localStorage.getItem("accessToken")) {
-    return <Navigate to={"/login"} />;
-  }
+export default function Layout() {
   return (
     <div>
       <Outlet/>
