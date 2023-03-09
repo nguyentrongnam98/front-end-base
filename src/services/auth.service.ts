@@ -110,7 +110,8 @@ export function useFetchDataDetail(todoId:number) {
 }
 
 export function useLogin() {
-    return useMutation(async (account) => {
+    return useMutation<unknown,unknown,{username:string,password:string},unknown>(async (account) => {
+        console.log('account',account);
        try {
         const [error, res] = await transformRequest<UserInfomationDto>({
             url: '/login',
